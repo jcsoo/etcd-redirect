@@ -46,7 +46,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     template := fields[1]
     re, err := regexp.Compile(pattern)
     if err != nil {
-      log.Printf("Error compiling regular expression %s: %s", pattern, err)
+      fmt.Printf("Error compiling regular expression %s: %s", pattern, err)
       continue
     }
     if re.MatchString(r.RequestURI) == true {
@@ -55,8 +55,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
         target = re.ExpandString(target, template, r.RequestURI, s)
 	    }
 
-      log.Printf("%s matched URI %s", pattern, r.RequestURI)
-      log.Printf("http://%s%s -> %s\n", r.Host, r.RequestURI, target)
+      fmt.Printf("%s: %s matched URI %s\n", r.Host, pattern, r.RequestURI)
+      fmt.Printf("http://%s%s -> %s\n", r.Host, r.RequestURI, target)
       http.Redirect(w, r, string(target) ,302)
       return
     }
