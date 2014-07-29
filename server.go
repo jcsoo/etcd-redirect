@@ -39,7 +39,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   lines := strings.Split(response.Node.Value,"\n")
   for _, line := range lines {
     fields := strings.Split(line," ")
-    if len(fields) < 1 {
+    if len(fields) < 2 {
       continue
     }
     pattern := fields[0]
